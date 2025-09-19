@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Kill a Mockingbird - Introduction Lesson</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .progress-bar {
+                display: none !important;
+            }
+            
+            .lesson-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                page-break-inside: avoid;
+                margin-bottom: 20px !important;
+            }
+            
+            .lesson-card::before {
+                background: #333 !important;
+            }
+            
+            .header {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .timeline {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+            
+            .interactive-element {
+                background: #f0f0f0 !important;
+                color: black !important;
+                border: 1px solid #ccc !important;
+            }
+            
+            .answer {
+                display: block !important;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #f1c40f);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .question-section {
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+
+        .answer {
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: #e8f4f8;
+            transform: translateX(10px);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 80px;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content {
+            margin-left: 20px;
+        }
+
+        .interactive-element {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+            transform: scale(1.02);
+        }
+
+        .image-links {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .image-links a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .image-links a:hover {
+            color: #1f618d;
+            text-decoration: underline;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .character-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .character-card:hover {
+            border-color: #3498db;
+            background: #e8f4f8;
+        }
+
+        .character-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .character-role {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #f1c40f);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>To Kill a Mockingbird</h1>
+            <p>Introduction Lesson - Understanding Harper Lee's Masterpiece</p>
+        </div>
+
+        <div class="lesson-grid">
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">👤</div>
+                    Who is Harper Lee?
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('author-answer')">
+                        Click to learn about the author →
+                    </div>
+                    <div class="answer" id="author-answer">
+                        <strong>Nelle Harper Lee (1926-2016)</strong><br><br>
+                        • Born in Monroeville, Alabama - a small Southern town that inspired the fictional Maycomb<br>
+                        • Studied law at the University of Alabama but left in 1949 to pursue writing in New York<br>
+                        • Worked as an airline reservation clerk for years before writing full-time in 1956<br>
+                        • Published "To Kill a Mockingbird" in 1960, winning the Pulitzer Prize in 1961<br>
+                        • Like Scout, her father was a lawyer who once defended two black men accused of murder<br>
+                        • Published "Go Set a Watchman" in 2015, causing controversy with its portrayal of an older Atticus<br><br>
+                        
+                        <div class="image-links">
+                            📸 <strong>Visual Resources:</strong><br>
+                            • <a href="https://www.biography.com/writer/harper-lee" target="_blank">Harper Lee Biography & Photos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">🏛️</div>
+                    Setting & Historical Context
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('setting-answer')">
+                        What was 1930s Alabama like? →
+                    </div>
+                    <div class="answer" id="setting-answer">
+                        <strong>Maycomb, Alabama - 1930s</strong><br><br>
+                        • Small fictional town in the Deep South during the Great Depression<br>
+                        • Segregated society under Jim Crow laws<br>
+                        • Racial tensions and deeply ingrained prejudices<br>
+                        • Economic hardship affecting all social classes<br>
+                        • Traditional Southern values and social hierarchies<br>
+                        • A time when challenging racial injustice was dangerous and rare<br><br>
+                        
+                        <div class="image-links">
+                            📸 <strong>Visual Resources:</strong><br>
+                            • <a href="https://www.monroecountymuseum.org/old-courthouse-museum" target="_blank">Monroeville Courthouse (Real Maycomb)</a><br>
+                            • <a href="https://www.encyclopediaofAlabama.org/article/h-1436" target="_blank">Encyclopedia of Alabama - Jim Crow Era</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">👥</div>
+                    Main Characters
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('characters-answer')">
+                        Who are the key players? →
+                    </div>
+                    <div class="answer" id="characters-answer">
+                        <div class="character-grid">
+                            <div class="character-card">
+                                <div class="character-name">Scout Finch</div>
+                                <div class="character-role">Narrator & Protagonist</div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-name">Atticus Finch</div>
+                                <div class="character-role">Scout's Father, Lawyer</div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-name">Jem Finch</div>
+                                <div class="character-role">Scout's Brother</div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-name">Boo Radley</div>
+                                <div class="character-role">Mysterious Neighbor</div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-name">Tom Robinson</div>
+                                <div class="character-role">Falsely Accused Man</div>
+                            </div>
+                            <div class="character-card">
+                                <div class="character-name">Calpurnia</div>
+                                <div class="character-role">Finch Family Housekeeper</div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="image-links">
+                            📸 <strong>Visual Resources:</strong><br>
+                            • <a href="https://www.imdb.com/title/tt0056592/mediaviewer/" target="_blank">Classic 1962 Film Cast Photos</a><br>
+                            • <a href="https://www.sparknotes.com/lit/mocking/characters/" target="_blank">SparkNotes Character Analysis & Images</a><br>
+                            • <a href="https://www.cliffsnotes.com/literature/t/to-kill-a-mockingbird/character-map" target="_blank">CliffsNotes Character Illustrations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">📉</div>
+                    The Great Depression
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('depression-answer')">
+                        How did the Depression affect the South? →
+                    </div>
+                    <div class="answer" id="depression-answer">
+                        <strong>Economic Devastation (1929-1939)</strong><br><br>
+                        • Stock market crash of 1929 led to widespread unemployment<br>
+                        • The South was already economically disadvantaged<br>
+                        • Agricultural collapse hit farming communities hard<br>
+                        • Poverty affected all social classes, deepening existing inequalities<br>
+                        • Limited opportunities increased social tensions<br>
+                        • Many families struggled to survive, creating desperation and scapegoating<br><br>
+                        
+                        <div class="image-links">
+                            📸 <strong>Visual Resources:</strong><br>
+                            • <a href="https://www.encyclopediaofAlabama.org/article/h-1041" target="_blank">Great Depression in Alabama</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">⚖️</div>
+                    Jim Crow Laws & Segregation
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('jimcrow-answer')">
+                        What was life like under segregation? →
+                    </div>
+                    <div class="answer" id="jimcrow-answer">
+                        <strong>"Separate but Equal" - The Reality</strong><br><br>
+                        • Laws enforcing racial segregation throughout the South (1877-1965)<br>
+                        • Separate schools, restaurants, transportation, and public facilities<br>
+                        • African Americans faced legal discrimination and violence<br>
+                        • Voting rights severely restricted through literacy tests and poll taxes<br>
+                        • Economic opportunities limited to lowest-paying jobs<br>
+                        • Any challenge to the system met with harsh consequences<br>
+                        • The legal system heavily biased against African Americans<br><br>
+                        
+                        <div class="image-links">
+                            📸 <strong>Visual Resources:</strong><br>
+                            • <a href="https://www.loc.gov/collections/civil-rights-history-project/" target="_blank">Library of Congress - Civil Rights History</a><br>
+                            • <a href="https://www.encyclopediaofAlabama.org/article/h-1248" target="_blank">Scottsboro Boys Trial Photos & Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <div class="card-title">
+                    <div class="card-icon">👁️</div>
+                    Scout as Narrator
+                </div>
+                <div class="question-section">
+                    <div class="question" onclick="toggleAnswer('narrator-answer')">
+                        What makes Scout's perspective unique? →
+                    </div>
+                    <div class="answer" id="narrator-answer">
+                        <strong>Adult Scout Looking Back</strong><br><br>
+                        • The story is told by adult Scout reflecting on her childhood (ages 6-9)<br>
+                        • Dual perspective: child's innocence + adult's understanding<br>
+                        • Allows readers to see events through fresh, unprejudiced eyes<br>
+                        • Child's questions expose adult hypocrisy and injustice<br>
+                        • Coming-of-age story: loss of innocence about her community<br>
+                        • Scout's growth mirrors the reader's growing awareness of social issues
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h3>Historical Timeline</h3>
+            <div class="timeline-item">
+                <div class="timeline-year">1926</div>
+                <div class="timeline-content">Harper Lee is born in Monroeville, Alabama</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1929</div>
+                <div class="timeline-content">Stock Market Crash begins the Great Depression</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1931</div>
+                <div class="timeline-content">Scottsboro Boys trial (inspiration for Tom Robinson's trial)</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1930s</div>
+                <div class="timeline-content">Setting of "To Kill a Mockingbird" - Jim Crow South during Depression</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1960</div>
+                <div class="timeline-content">"To Kill a Mockingbird" is published during Civil Rights Movement</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1961</div>
+                <div class="timeline-content">Harper Lee wins the Pulitzer Prize</div>
+            </div>
+        </div>
+
+        <div class="interactive-element" onclick="showReadyMessage()">
+            🚀 Get Ready to Start Reading!
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            
+            // Just toggle current answer without closing others
+            answer.classList.toggle('show');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalAnswers = document.querySelectorAll('.answer').length;
+            const shownAnswers = document.querySelectorAll('.answer.show').length;
+            const progress = (shownAnswers / totalAnswers) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showReadyMessage() {
+            const message = `
+🎓 Congratulations! You've completed the introduction to "To Kill a Mockingbird"!
+
+Now you're ready to dive into Harper Lee's powerful story with the background knowledge you need:
+
+✓ You know about Harper Lee and her connection to the story
+✓ You understand the 1930s Alabama setting and Jim Crow era
+✓ You've met the main characters who will guide this journey
+✓ You grasp the historical context of the Great Depression
+✓ You understand Scout's unique perspective as narrator
+
+As you read, remember:
+• Pay attention to how Scout's innocent observations reveal adult prejudices
+• Notice how the setting influences the characters' actions and beliefs
+• Consider how economic hardship affects different characters differently
+• Watch for moments when characters choose courage over conformity
+
+Happy reading! This is a story that will stay with you long after you turn the final page.
+            `;
+            
+            alert(message);
+        }
+
+        // Add smooth scrolling and interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.lesson-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+
+        // Character card interactions
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const name = this.querySelector('.character-name').textContent;
+                const role = this.querySelector('.character-role').textContent;
+                alert(`${name}: ${role}\n\nYou'll learn more about this character as we read the novel!`);
+            });
+        });
+
+        // Timeline item interactions
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.background = '#d5e8f7';
+                setTimeout(() => {
+                    this.style.background = '#f8f9fa';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
